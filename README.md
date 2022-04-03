@@ -7,7 +7,25 @@ brew install yarn --without-node # node가 설치되어 있다면
 brew install yarn # node가 없다면
 ```
 2. .env 파일 커스텀
-- DB 관련 변수를 로컬 MySQL 서버에 맞게 변경
+- 해당 레퍼지토리의 루트 경로에 .env 파일 생성
+- DB 관련 변수를 로컬 MySQL 서버에 맞게 설정
+```
+PORT = 8000
+
+DB_HOST = 127.0.0.1
+DB_USERNAME = root
+DB_PASSWORD = 1234
+DB_PORT = 3306
+DB_DIALECT = mysql
+DB_DATABASE = test
+
+CACHE_USER = login
+CACHE_AUTH = verified
+
+SMS_SERVICE_ID =
+SMS_ACCESS_KEY =
+SMS_SECRET_KEY =
+```
 3. yarn 명령어를 통한 서버 실행
 ```bash
 yarn add package.json # 필요한 패키지 설치
