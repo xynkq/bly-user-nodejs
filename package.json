@@ -1,0 +1,38 @@
+{
+  "name": "bly-user-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://xynkq@github.com/xynkq/bly-user-nodejs.git",
+  "author": "Seoyeon Kang <xynkq1@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/index.js"
+  },
+  "dependencies": {
+    "@hapi/joi-date": "^2.0.1",
+    "change-object-case": "^0.2.1",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.0",
+    "fs": "^0.0.1-security",
+    "global": "^4.4.0",
+    "http": "^0.0.1-security",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.13.4",
+    "koa-body": "^4.2.0",
+    "koa-cors": "^0.0.16",
+    "koa-router": "^10.1.1",
+    "koa-static": "^5.0.0",
+    "memory-cache": "^0.2.0",
+    "mime-types": "^2.1.35",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "node-fetch": "2",
+    "nodemon": "^2.0.15",
+    "package.json": "^2.0.1",
+    "path": "^0.12.7",
+    "sequelize": "^6.17.0",
+    "sequelize-cli": "^6.4.1"
+  }
+}
