@@ -1,4 +1,3 @@
-// const { NCPClient } = require('node-sens');
 const config = require('./../../config/sms');
 const fetch = require('node-fetch');
 const CryptoJS = require('crypto-js');
