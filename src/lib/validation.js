@@ -4,9 +4,9 @@ exports.validateUser = (body) => {
   const schema = Joi.object().keys({
     email: Joi.string().required().email(),
     mobile: Joi.string().required().length(11).pattern(/^[0-9]+$/),
-    pw: Joi.string().required().min(8).regex(/^[a-zA-Z0-9]{8,20}$/),
-    name: Joi.string().required().min(1).max(20),
-    nickname: Joi.string().required().min(1).max(20),
+    pw: Joi.string().required().min(8).max(20),
+    name: Joi.string().required().min(2).max(20),
+    nickname: Joi.string().required().min(2).max(20),
   });
   try {
     return schema.validate(body);
@@ -18,7 +18,7 @@ exports.validateUser = (body) => {
 exports.validateLoginByEmail = (body) => {
   const schema = Joi.object().keys({
     email: Joi.string().required().email(),
-    pw: Joi.string().required().min(8).regex(/^[a-zA-Z0-9]{8,20}$/),
+    pw: Joi.string().required().min(8).max(20),
   });
   try {
     return schema.validate(body);
@@ -30,7 +30,7 @@ exports.validateLoginByEmail = (body) => {
 exports.validateLoginByMobile = (body) => {
   const schema = Joi.object().keys({
     mobile: Joi.string().required().length(11).pattern(/^[0-9]+$/),
-    pw: Joi.string().required().min(8).regex(/^[a-zA-Z0-9]{8,20}$/),
+    pw: Joi.string().required().min(8).max(20),
   });
   try {
     return schema.validate(body);
@@ -53,7 +53,7 @@ exports.validateVerifyCode = (body) => {
 
 exports.validateCreateCode = (body) => {
   const schema = Joi.object().keys({
-    mobile: Joi.string().length(11).pattern(/^[0-9]+$/).required(),
+    mobile: Joi.string().required().length(11).pattern(/^[0-9]+$/),
   });
   try {
     return schema.validate(body);
