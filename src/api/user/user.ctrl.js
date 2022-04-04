@@ -4,8 +4,9 @@ const models = require('./../../models');
 const config = require('./../../../config/cache');
 
 exports.add = async (ctx) => {
-  console.log('사용자 추가');
+  console.log('회원 가입');
   const { body } = ctx.request;
+  console.log(body);
   const validate = Validate.validateUser(body);
   if (validate.error) {
     console.log(validate.error.message);
@@ -36,7 +37,6 @@ exports.add = async (ctx) => {
       return;
     }
     const verified = await Cache.get(mobile);
-    console.log(verified);
     if (verified != config.auth) {
       ctx.status = 401;
       ctx.body = {
@@ -50,14 +50,14 @@ exports.add = async (ctx) => {
     ctx.status = 200;
     ctx.body = {
       status: 200,
-      message: '사용자 추가에 성공하였습니다.',
+      message: '회원 가입에 성공하였습니다.',
     };
   } catch (error) {
     console.log(error.message);
     ctx.status = 500;
     ctx.body = {
       status: 500,
-      message: '사용자 추가에 실패하였습니다.',
+      message: '회원 가입에 실패하였습니다.',
     };
   }
 };
@@ -84,7 +84,7 @@ exports.loginByEmail = async (ctx) => {
       ctx.status = 404;
       ctx.body = {
         status: 404,
-        message: '입력 정보와 일치하는 사용자가 존재하지 않습니다.',
+        message: '입력 정보와 일치하는 회원이 존재하지 않습니다.',
       };
       return;
     }
@@ -93,7 +93,7 @@ exports.loginByEmail = async (ctx) => {
       ctx.status = 403;
       ctx.body = {
         status: 403,
-        message: '이미 로그인된 사용자입니다.',
+        message: '이미 로그인된 회원입니다.',
       };
       return;
     }
@@ -135,7 +135,7 @@ exports.loginByMobile = async (ctx) => {
       ctx.status = 404;
       ctx.body = {
         status: 404,
-        message: '입력 정보와 일치하는 사용자가 존재하지 않습니다.',
+        message: '입력 정보와 일치하는 회원이 존재하지 않습니다.',
       };
       return;
     }
@@ -144,7 +144,7 @@ exports.loginByMobile = async (ctx) => {
       ctx.status = 403;
       ctx.body = {
         status: 403,
-        message: '이미 로그인된 사용자입니다.',
+        message: '이미 로그인된 회원입니다.',
       };
       return;
     }
@@ -175,7 +175,7 @@ exports.logout = async (ctx) => {
       ctx.status = 404;
       ctx.body = {
         status: 404,
-        message: '존재하지 않는 사용자입니다.',
+        message: '존재하지 않는 회원입니다.',
       };
       return;
     }
@@ -184,7 +184,7 @@ exports.logout = async (ctx) => {
       ctx.status = 403;
       ctx.body = {
         status: 403,
-        message: '로그인하지 않은 사용자입니다.',
+        message: '로그인하지 않은 회원입니다.',
       };
       return;
     }
@@ -205,7 +205,7 @@ exports.logout = async (ctx) => {
 };
 
 exports.changePassword = async (ctx) => {
-  console.log('사용자 수정');
+  console.log('비밀번호 재설정');
   const { body } = ctx.request;
   console.log(body);
   const validate = Validate.validateLoginByMobile(body);
@@ -225,7 +225,7 @@ exports.changePassword = async (ctx) => {
       ctx.satuts = 404;
       ctx.body = {
         status: 404,
-        message: '존재하지 않는 사용자입니다.',
+        message: '존재하지 않는 회원입니다.',
       };
       return;
     }
@@ -243,26 +243,26 @@ exports.changePassword = async (ctx) => {
     ctx.status = 200;
     ctx.body = {
       status: 200,
-      message: '사용자 수정에 성공하였습니다.',
+      message: '회원 수정에 성공하였습니다.',
     };
   } catch (error) {
     console.log(error.message);
     ctx.status = 500;
     ctx.body = {
       status: 500,
-      message: '사용자 수정에 실패하였습니다.',
+      message: '회원 수정에 실패하였습니다.',
     };
   }
 };
 
 exports.searchAll = async (ctx) => {
-  console.log('사용자 전체 조회');
+  console.log('회원 전체 조회');
   try {
     const users = await models.User.findAllUsers();
     ctx.status = 200;
     ctx.body = {
       status: 200,
-      message: '사용자 전체 조회에 성공하였습니다.',
+      message: '회원 전체 조회에 성공하였습니다.',
       data: users,
     };
   } catch (error) {
@@ -270,13 +270,13 @@ exports.searchAll = async (ctx) => {
     ctx.status = 500;
     ctx.body = {
       status: 500,
-      message: '사용자 전체 조회에 실패하였습니다.',
+      message: '회원 전체 조회에 실패하였습니다.',
     };
   }
 };
 
 exports.search = async (ctx) => {
-  console.log('검색');
+  console.log('회원 조회');
   const { _idx } = ctx.params;
   console.log(_idx);
   try {
@@ -286,13 +286,13 @@ exports.search = async (ctx) => {
       ctx.status = 404;
       ctx.body = {
         status: 404,
-        message: '존재하지 않는 사용자입니다.',
+        message: '존재하지 않는 회원입니다.',
       };
     } else {
       ctx.status = 200;
       ctx.body = {
         status: 200,
-        message: '사용자 검색에 성공하였습니다.',
+        message: '회원 조회에 성공하였습니다.',
         data: user,
       };
     }
@@ -301,13 +301,13 @@ exports.search = async (ctx) => {
     ctx.status = 500;
     ctx.body = {
       status: 500,
-      message: '사용자 검색에 실패하였습니다.',
+      message: '회원 조회에 실패하였습니다.',
     };
   }
 }
 
 exports.remove = async (ctx) => {
-  console.log('사용자 삭제');
+  console.log('회원 탈퇴');
   const { _idx } = ctx.params;
   console.log(_idx);
   try {
@@ -317,7 +317,7 @@ exports.remove = async (ctx) => {
       ctx.status = 404;
       ctx.body = {
         status: 404,
-        message: '존재하지 않는 사용자입니다.',
+        message: '존재하지 않는 회원입니다.',
       };
     } else {
       await models.User.removeUser(_idx);
@@ -325,7 +325,7 @@ exports.remove = async (ctx) => {
       ctx.status = 200;
       ctx.body = {
         status: 200,
-        message: '사용자 삭제에 성공하였습니다.',
+        message: '회원 탈퇴에 성공하였습니다.',
       };
     }
   } catch (error) {
@@ -333,7 +333,7 @@ exports.remove = async (ctx) => {
     ctx.status = 500;
     ctx.body = {
       status: 500,
-      message: '사용자 삭제에 실패하였습니다.',
+      message: '회원 탈퇴에 실패하였습니다.',
     };
   }
 };
