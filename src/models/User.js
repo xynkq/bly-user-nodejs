@@ -53,6 +53,17 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   });
 
+  User.findAllForCheck = (email, mobile) => User.findOne({ // 회원 가입 시 중복 데이터 확인
+    attributes: ['idx', 'email', 'pw', 'name', 'nickname', 'mobile'],
+    where: {
+      [Op.or]: [
+        { email },
+        { mobile },
+      ]
+    },
+    raw: true,
+  });
+
   User.loginForEamil = (email, pw) => User.findOne({
     attributes: ['idx', 'email', 'pw', 'name', 'nickname', 'mobile'],
     where: {
@@ -71,35 +82,9 @@ module.exports = (sequelize, DataTypes) => {
     raw: true,
   });
 
-  User.findAllForCheck = (email, mobile) => User.findOne({
-    attributes: ['idx', 'email', 'pw', 'name', 'nickname', 'mobile'],
-    where: {
-      [Op.or]: [
-        { email },
-        { mobile },
-      ]
-    },
-    raw: true,
-  });
-
-  User.findByEmail = (email) => User.findOne({
-    attributes: ['idx', 'email', 'pw', 'name', 'nickname', 'mobile'],
-    where: { email },
-    raw: true,
-  });
-
   User.findByMobile = (mobile) => User.findOne({
     attributes: ['idx', 'email', 'pw', 'name', 'nickname', 'mobile'],
     where: { mobile },
-    raw: true,
-  });
-
-  User.findAllUsers = () => User.findAll({
-    attributes: ['idx', 'email', 'pw', 'name', 'nickname', 'mobile'],
-    order: [
-      ['idx', 'ASC'],
-    ],
-    nest: true,
     raw: true,
   });
 
@@ -110,6 +95,15 @@ module.exports = (sequelize, DataTypes) => {
     where: {
       idx,
     },
+  });
+
+  User.findAllUsers = () => User.findAll({
+    attributes: ['idx', 'email', 'pw', 'name', 'nickname', 'mobile'],
+    order: [
+      ['idx', 'ASC'],
+    ],
+    nest: true,
+    raw: true,
   });
 
   User.removeUser = (idx) => User.destroy({
