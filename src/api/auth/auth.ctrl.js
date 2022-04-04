@@ -3,7 +3,9 @@ const Validate = require('../../lib/validation');
 const config = require('./../../../config/cache');
 
 exports.createCode = async (ctx) => {
+  console.log('인증 코드 생성');
   const { body } = ctx.request;
+  console.log(body);
   const validate = Validate.validateCreateCode(body);
   if (validate.error) {
     ctx.status = 400;
@@ -35,7 +37,9 @@ exports.createCode = async (ctx) => {
 };
 
 exports.verifyCode = async (ctx) => {
+  console.log('인증 코드 확인');
   const { body } = ctx.request;
+  console.log(body);
   const validate = Validate.validateVerifyCode(body);
   if (validate.error) {
     console.log(validate.error.message);
