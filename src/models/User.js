@@ -82,15 +82,6 @@ module.exports = (sequelize, DataTypes) => {
     raw: true,
   });
 
-  User.changePassword = (idx, pw) => User.update({
-    pw,
-    updated: sequelize.literal('CURRENT_TIMESTAMP'),
-  }, {
-    where: {
-      idx,
-    },
-  });
-
   User.findByEmail = (email) => User.findOne({
     attributes: ['idx', 'email', 'pw', 'name', 'nickname', 'mobile'],
     where: { email },
@@ -110,6 +101,15 @@ module.exports = (sequelize, DataTypes) => {
     ],
     nest: true,
     raw: true,
+  });
+
+  User.changePassword = (idx, pw) => User.update({
+    pw,
+    updated: sequelize.literal('CURRENT_TIMESTAMP'),
+  }, {
+    where: {
+      idx,
+    },
   });
 
   User.removeUser = (idx) => User.destroy({
