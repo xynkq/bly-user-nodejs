@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       field: 'email',
       type: DataTypes.STRING(50),
       allowNull: false,
-      primaryKey: true,
+      unique: true,
       validate: {
         isEmail: true,
       },
