@@ -66,19 +66,13 @@ module.exports = (sequelize, DataTypes) => {
 
   User.loginForEamil = (email, pw) => User.findOne({
     attributes: ['idx', 'email', 'pw', 'name', 'nickname', 'mobile'],
-    where: {
-      email,
-      pw,
-    },
+    where: { email, pw },
     raw: true,
   });
 
   User.loginForMobile = (mobile, pw) => User.findOne({
     attributes: ['idx', 'email', 'pw', 'name', 'nickname', 'mobile'],
-    where: {
-      mobile,
-      pw,
-    },
+    where: { mobile, pw },
     raw: true,
   });
 
@@ -92,9 +86,7 @@ module.exports = (sequelize, DataTypes) => {
     pw,
     updated: sequelize.literal('CURRENT_TIMESTAMP'),
   }, {
-    where: {
-      idx,
-    },
+    where: { idx },
   });
 
   User.findAllUsers = () => User.findAll({
@@ -107,9 +99,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.removeUser = (idx) => User.destroy({
-    where: {
-      idx,
-    },
+    where: { idx },
   });
 
   return User;
