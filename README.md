@@ -6,18 +6,19 @@
 brew install yarn --without-node # node가 설치되어 있다면
 brew install yarn # node가 없다면
 ```
-2. .env 파일 커스텀
-- 해당 레퍼지토리의 루트 경로에 .env 파일 생성
+2. .env 파일 생성
+- 해당 레퍼지토리의 루트 경로에 .env 파일 커스텀 필요
 - DB 관련 변수를 로컬 MySQL 서버에 맞게 설정
+- 기존 서버에 있던 계정, 데이터베이스를 추가해야 함
 ```
 PORT = 8000
 
 DB_HOST = 127.0.0.1
-DB_USERNAME = root
-DB_PASSWORD = 1234
+DB_USERNAME =
+DB_PASSWORD =
 DB_PORT = 3306
 DB_DIALECT = mysql
-DB_DATABASE = test
+DB_DATABASE =
 
 CACHE_USER = login
 CACHE_AUTH = verified
@@ -42,6 +43,7 @@ yarn start # 서버 실행
 ### 구현 스펙
 * 회원가입
   + 전화번호 인증 여부 확인
+  + 중복 이메일, 전화번호 가입 불가
 * 로그인 및 로그아웃
   + 전화번호 인증 여부 확인
   + 이메일 또는 전화번호 + 비밀번호
