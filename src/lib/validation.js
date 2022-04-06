@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 exports.validateUser = (body) => {
   const schema = Joi.object().keys({
-    email: Joi.string().required().email(),
+    email: Joi.string().required().email().max(320),
     mobile: Joi.string().required().length(11).pattern(/^[0-9]+$/),
     pw: Joi.string().required().min(8).max(20),
     name: Joi.string().required().min(2).max(20),
