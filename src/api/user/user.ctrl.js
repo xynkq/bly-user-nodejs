@@ -102,6 +102,7 @@ exports.loginByEmail = async (ctx) => {
     ctx.body = {
       status: 200,
       message: '로그인에 성공하였습니다.',
+      data: user,
     };
   } catch (error) {
     console.log(error.message);
@@ -153,6 +154,7 @@ exports.loginByMobile = async (ctx) => {
     ctx.body = {
       status: 200,
       message: '로그인에 성공하였습니다.',
+      data: user
     };
   } catch (error) {
     console.log(error.message);
