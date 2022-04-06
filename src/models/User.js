@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       field: 'email',
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING(352),
       allowNull: false,
       unique: true,
       validate: {
@@ -19,23 +19,23 @@ module.exports = (sequelize, DataTypes) => {
     },
     mobile: {
       field: 'mobile',
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING(13),
       allowNull: false,
       unique: true,
     },
     pw: {
       field: 'pw',
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING(22),
       allowNull: false,
     },
     name: {
       field: 'name',
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING(22),
       allowNull: false,
     },
     nickname: {
       field: 'nickname',
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING(22),
       allowNull: false,
     },
     created: {
