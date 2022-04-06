@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const Koa = require('koa');
-const cors = require('koa-cors');
+const cors = require('@koa/cors');
 const Router = require('koa-router');
 const Body = require('koa-body')({ multipart: true });
 const Http = require('http');
