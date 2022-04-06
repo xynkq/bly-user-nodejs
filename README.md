@@ -22,10 +22,6 @@ DB_DATABASE =
 
 CACHE_USER = login
 CACHE_AUTH = verified
-
-SMS_SERVICE_ID =
-SMS_ACCESS_KEY =
-SMS_SECRET_KEY =
 ```
 3. yarn 명령어를 통한 서버 실행
 ```bash
@@ -33,26 +29,25 @@ yarn add package.json # 필요한 패키지 설치
 yarn start # 서버 실행
 ```
 ### 사용 언어 및 기술
+* MySQL
 * NodeJS
   + Koa
   + Joi
   + Sequelize
   + Memory Cache
-* MySQL
 
 ### 구현 스펙
 * 회원가입
   + 전화번호 인증 여부 확인
   + 중복 이메일, 전화번호 가입 불가
 * 로그인 및 로그아웃
-  + 전화번호 인증 여부 확인
   + 이메일 또는 전화번호 + 비밀번호
   + 중복 로그인 불가 (재로그인 시 로그아웃 필수)
 * 사용자 정보 조회
 * 비밀번호 재설정
   + 전화번호 인증 여부 확인
 
-### etc
+### 특별히 소개하고 싶은 부분
 * Request Body Validation
   + Joi 프레임워크를 활용하여 클라이언트에서 들어오는 요청의 포맷 체크를 통한 예외 처리
     - 이메일 : 형식 확인
@@ -61,13 +56,13 @@ yarn start # 서버 실행
     - 전화번호 : '-' 없이 11자 (ex. 01012345678)
   + 검증 오류 시 400 코드 반환
 * Auto Create DB Table
-  + Sequelize 프레임워크를 활용하여 서버 실행 시 DB 환경 변수에 맞춰 테이블 생성 (.env 참조)
+  + Sequelize 프레임워크를 활용하여 서버 실행 시 자동으로 테이블 생성 (.env 파일 내 DB 변수 참조)
 * Cache 활용을 통한 기능 구현
   + 전화번호 인증
-    - SMS 외부 API를 활용하여 구현하였으나, 해당 API의 콘솔에 등록된 전화번호만 전송되어 사용하지 않음 (sms.js)
-    - 대신 서버 자체에서 임의의 코드 생성 후 Response Body 에 포함해 전송
-    - 전화번호 인증을 위한 코드 발급 시 캐시에 `전화번호:코드` 저장
-    - 코드 입력 시 일치할 경우, 해당 캐시 값을 `전화번호:verified` 로 변경
+    - SMS 외부 API와 연동하여 구현하였으나, 해당 API의 콘솔에 등록된 전화번호만 전송되어 사용하지 않음 (관련 코드 파일은 sms.js)
+    - 대신 서버 자체에서 임의의 코드 생성 후 Response Body 값에 포함
+    - 전화번호 인증을 위한 코드 발급 시 캐시에 `전화번호:코드` 저장 (/auth)
+    - 코드 입력 시 일치할 경우, 해당 캐시 값을 `전화번호:verified` 로 변경 (/auth/verify)
     - 회원가입 및 비밀번호 재설정 시 `전화번호:verified` 값 확인
   + 로그인 시 캐시에 `idx:login` 저장
     - 로그아웃 시 제거
