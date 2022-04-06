@@ -65,7 +65,7 @@ exports.verifyCode = async (ctx) => {
       ctx.status = 402;
       ctx.body = {
         status: 402,
-        message: '코드를 재발급해 주세요.',
+        message: '코드가 일치하지 않습니다. 분실 시 재발급해 주세요.',
       };
     } else {
       Cache.del(mobile);
@@ -73,7 +73,7 @@ exports.verifyCode = async (ctx) => {
       ctx.status = 200;
       ctx.body = {
         status: 200,
-        message: '인증이 완료되었습니다.',
+        message: '전화번호 인증이 완료되었습니다.',
       };
     }
   } catch (error) {
@@ -81,7 +81,7 @@ exports.verifyCode = async (ctx) => {
     ctx.status = 500;
     ctx.body = {
       status: 500,
-      message: '사용자 검색에 실패하였습니다.',
+      message: '전화번호 인증이 실패하였습니다.',
     };
   }
 };
